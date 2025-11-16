@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+    *{
+        font-family: "JetBrains Mono";
+        font-style: normal;
+    }
+    </style>  
+    <script src="https://kit.fontawesome.com/e53a9172bb.js" crossorigin="anonymous"></script>
+    <title>WorkStaff Manager</title>
+</head>
+<body class="p-2 bg-[#FAFCEE] flex flex-col gap-4">
+    <header class="border-2 border-[#1E1E1E] rounded-md p-2">
+        <div class="font-extrabold text-xl flex justify-between ">
+            <logo class="text-[#1E1E1E]">Work<span class="text-[#68A17B]">Staff</span></logo>
+            <button class="hover:bg-[#EAEFCC] cursor-pointer rounded-sm px-1"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+        </div>
+    </header>
+    <section class="grid grid-flow-col grid-cols-8">
+        <section class="border-2 border-[#1E1E1E] rounded-md col-span-2 p-2">
+            <div class="flex flex-col gap-4">
+                <div>
+                    <input type="text" placeholder="find someone..." class="text-xs text-[#EAEFCC] border-2 border-[#1E1E1E] rounded-sm p-2 w-full">
+                </div>
+                <div>
+                    <div class="bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex gap-2 p-1">
+                        <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                        <div class="flex justify-between ">
+                            <div class="flex flex-col">
+                                <small>FullName</small>
+                                <small>Role</small>
+                            </div>
+                            <button class="hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="col-span-1"></div>
+        <section class="border-2 border-[#1E1E1E] rounded-md col-span-5 p-2 flex flex-col gap-4">
+            <div class="col-span-5 bg-[url(Workspace.png)] bg-cover h-full"></div>
+            <div class="border-2 border-[#1E1E1E] rounded-md p-4">
+                <div>
+                    <div class="bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                        <div class="flex justify-between p-1">
+                            <div class="flex flex-col text-xs">
+                                <small>Fullname</small>
+                                <small>Role</small>
+                            </div>
+                            <button class="hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-minus" style="color: #1e1e1e;"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section id="addModal" class="hidden bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2">
+        <header>
+            <div class="flex justify-between">
+                <h2>Add worker</h2>
+                <button class="hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-solid fa-xmark" style="color: #1e1e1e;"></i></button>
+            </div>
+        </header>
+        <div class="flex flex-col gap-2">
+            <div></div>
+            <form class="flex flex-col">
+                <div class="flex gap-2">
+                    <div class="flex flex-col">
+                        <label for="fullName">FullName:</label>
+                        <input type="text" placeholder="FullName" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="role">Role:</label>
+                        <input type="text" placeholder="Role" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                    </div>
+                </div>
+                <label for="number">Phone Number:</label>
+                <input type="text" placeholder="PhoneNumber" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                <label for="email">Email</label>
+                <input type="text" placeholder="Email" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                <label for="experience">Experience</label>
+                <input type="text" placeholder="Experience" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+            </form>
+            <div class="flex gap-2">
+                    <button class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
+                    <button class="hover:bg-[#5d7a9e] bg-[#8EA1B8] p-2 border-2 border-[#1e1e1e] rounded-sm cursor-pointer"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+                </div>
+        </div>
+    </section>
+</body>
+</html>
