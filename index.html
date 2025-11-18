@@ -15,20 +15,23 @@
     <title>WorkStaff Manager</title>
 </head>
 <body class="p-2 bg-[#FAFCEE] flex flex-col gap-4">
+    <!-- header -->
     <header class="border-2 border-[#1E1E1E] rounded-md p-2">
         <div class="font-extrabold text-xl flex justify-center ">
             <logo class="text-[#1E1E1E]">Work<span class="text-[#68A17B]">Staff</span></logo>
         </div>
     </header>
+    <!-- bodySection -->
     <section class="grid grid-flow-col grid-cols-8">
+        <!-- sidePanel -->
         <section class="border-2 border-[#1E1E1E] rounded-md col-span-2 p-2">
             <div class="flex flex-col gap-4">
                 <div class="flex flex-col gap-2">
-                    <button class="bg-[#68A17B] p-2 rounded-sm w-full">Add Worker</button>
+                    <button id="addWorkerBtn" class="bg-[#68A17B] p-2 rounded-sm w-full cursor-pointer hover:bg-[#4e8460]">Add Worker</button>
                     <input type="text" placeholder="find someone..." class="text-xs text-[#686f40] border-2 border-[#1E1E1E] rounded-sm p-2 w-full">
                 </div>
                 <div>
-                    <div class="bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1">
+                    <div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
                         <div class="flex gap-2">
                             <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
                             <div class="flex flex-col">
@@ -36,25 +39,66 @@
                                 <small>Role</small>
                             </div>
                         </div>
-                        <button class="hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+                        <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- space -->
         <div class="col-span-1"></div>
+        <!-- mainSection -->
         <section class="border-2 border-[#1E1E1E] rounded-md col-span-5 p-2 flex flex-col gap-4 ">
-            <div class="col-span-5  grid grid-cols-4 grid-rows-3 ">
-                <div class="bg-[url(img/archive.webp)] col-span-1 row-span-1 bg-cover w-full h-full"></div>
-                <div class="bg-[url(img/meeting.webp)] col-span2 row-span-1 bg-cover w-full h-full"></div>
-                <div class="bg-[url(img/reception.webp)] col-span-2 row-span-2 bg-cover w-full h-full"></div>
-                <div class="bg-[url(img/security.webp)] col-span-1 row-span-1 bg-cover w-full h-full"></div>
-                <div class="bg-[url(img/servers.webp)] col-span-1 row-span-1 bg-cover w-full h-full"></div>
-                <div class="bg-[url(img/rest.webp)] col-span-1 row-span-1 bg-cover w-full h-full"></div>
-
+            <!-- roomSection -->
+            <div class="col-span-5  grid grid-cols-11 grid-rows-3 bg-[url(Workspace.png)] bg-contain bg-no-repeat h-120">
+                <div id="meeting" class="col-span-4">
+                    <div class="flex gap-4 justify-center mt-4">
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="col-span-2 row-span-3 "></div>
+                <div id="archive" class="col-span-2 ">
+                    <div class="flex gap-4 justify-center mt-4">
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="col-span-1 row-span-1 "></div>
+                <div id="security" class="col-span-2 ">
+                    <div class="flex gap-4 justify-center mt-4">
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                    </div>
+                </div>
+                <div id="reception" class="col-span-4 row-span-2 ">
+                    <div class="flex gap-4 justify-center mt-4">
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="col-span-5"></div>
+                <div id="rest" class="col-span-2 ">
+                    <div class="flex gap-4 justify-center mt-4">
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="col-span-1 "></div>
+                <div id="servers" class="col-span-2">
+                    <div class="flex gap-4 justify-center mt-4">
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                    </div>
+                </div>
             </div>
+            <!-- bottomSection(WorkersinPlace) -->
             <div class="border-2 border-[#1E1E1E] rounded-md p-4">
                 <div>
-                    <div class="bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1 cursor-pointer">
                         <div class="flex justify-between p-1">
                             <div class="flex flex-col text-xs">
                                 <small>Fullname</small>
@@ -67,38 +111,89 @@
             </div>
         </section>
     </section>
-    <section id="addModal" class="hidden bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2">
-        <header>
-            <div class="flex justify-between">
-                <h2>Add worker</h2>
-                <button class="hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-solid fa-xmark" style="color: #1e1e1e;"></i></button>
-            </div>
-        </header>
-        <div class="flex flex-col gap-2">
-            <div></div>
-            <form class="flex flex-col">
+    <!-- addModal -->
+    <section id="addModal"  class="hidden">
+        <div  class=" block float-left left-1/2 top-1/2 absolute z-0 w-fit bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2">
+            <header>
+                <div class="flex justify-between">
+                    <h2>Add worker</h2>
+                    <button  class="closeModalBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-solid fa-xmark" style="color: #1e1e1e;"></i></button>
+                </div>
+            </header>
+            <div class="flex flex-col gap-2">
+                <div>
+                    <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>  
+                    
+                </div>    
+                <form class="font-bold text-[#1e1e1e] flex flex-col ">
+                    <div class="flex gap-2">
+                        <div class="flex flex-col">
+                            <label for="fullName">FullName:</label>
+                            <input id="fullname" type="text" placeholder="FullName" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="role">Role:</label>
+                            <input id="role" type="text" placeholder="Role" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                        </div>
+                    </div>
+                    <label for="number">Phone Number:</label>
+                    <input id="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <label for="experience">Experience</label>
+                    <input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                </form>
                 <div class="flex gap-2">
-                    <div class="flex flex-col">
-                        <label for="fullName">FullName:</label>
-                        <input type="text" placeholder="FullName" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                        <button id="addExperienceBtn"  class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
+                        <button id="addWorkerBtn"  class="hover:bg-[#5d7a9e] bg-[#8EA1B8] p-2 border-2 border-[#1e1e1e] rounded-sm cursor-pointer"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
                     </div>
-                    <div class="flex flex-col">
-                        <label for="role">Role:</label>
-                        <input type="text" placeholder="Role" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
-                    </div>
-                </div>
-                <label for="number">Phone Number:</label>
-                <input type="text" placeholder="PhoneNumber" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
-                <label for="email">Email</label>
-                <input type="text" placeholder="Email" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
-                <label for="experience">Experience</label>
-                <input type="text" placeholder="Experience" class="bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
-            </form>
-            <div class="flex gap-2">
-                    <button class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
-                    <button class="hover:bg-[#5d7a9e] bg-[#8EA1B8] p-2 border-2 border-[#1e1e1e] rounded-sm cursor-pointer"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
-                </div>
+            </div>
         </div>
     </section>
+    <!-- profileDetailModal -->
+    <section id="profileModal" class="hidden">
+        <div  class="place-self-center mt-24 block fixed z-0 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2 w-fit ">
+            <header class="m-2">
+                <div class="flex justify-between">
+                    <h2>Details</h2>
+                    <button  class="closeModalBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-solid fa-xmark" style="color: #1e1e1e;"></i></button>
+                </div>
+            </header>
+            <div class="flex flex-col gap-2">
+                <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>                         
+                <div class="font-bold text-[#1e1e1e] flex flex-col gap-2 ">
+                    <div class="flex gap-16">
+                        <div class="flex flex-col">
+                            <label for="fullName">FullName:</label>
+                            <h3>Portgas D.Ace</h3> 
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="role">Role:</label>
+                            <h3>Manager</h3>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="number">Phone Number:</label>
+                        <h3>0245842132</h3>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <h3>portgasace@yahoo.com</h3>
+                    </div>
+                    <div>
+                        <label for="experience">Experience</label>
+                        <h3>7 Years in managment</h3>
+                    </div>
+                    <div>
+                        <label></label>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                        <button class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Edit</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
 </body>
 </html>
