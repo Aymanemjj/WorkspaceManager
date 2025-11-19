@@ -16,16 +16,9 @@ function openModal1() {
     addModal.classList.replace("hidden", "block");
 }
 
-document
-    .querySelectorAll(".workerCard")
-    .forEach((element) => element.addEventListener("click", openModal2(element)));
 
-function openModal2(element) {
-    console.log("enter");
-    let filter = element.querySelector("small").innerHTML
-    
-    profileModal.classList.replace("hidden", "block");
-}
+
+
 
 document
     .querySelectorAll(".closeModalBtn")
@@ -43,47 +36,66 @@ function addToLocalStorage(list) {
     localStorage.setItem("workersList",JSON.stringify(list));
     updateWorkersSection();
 }
+function getFromLocalStorage(){
+    let workersList = JSON.parse (localStorage.getItem("workersList"))
+    return workersList;
+}
+
 const workersListSection= document.getElementById("workersListSection") 
 
 function updateWorkersSection() { 
-    let workersList =JSON.parse (localStorage.getItem("workersList"))
+    let workersList = getFromLocalStorage()
+    workersListSection.innerHTML=""
     workersList.forEach(worker =>
         workersListSection.innerHTML+=
             `<div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
-                    <div class="flex gap-2">
-                        <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
-                        <div class="flex flex-col">
-                            <small>${worker.fullname}</small>
-                            <small>${worker.role}</small>
-                        </div>
+                <div class="flex gap-2">
+                    <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                    <div class="flex flex-col">
+                        <small>${worker.fullname}</small>
+                        <small>${worker.role}</small>
                     </div>
-                    <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
-                </div>`
+                </div>
+                <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+            </div>`
         
     )
     
+document
+    .querySelectorAll(".workerCard")
+    .forEach((element) => element.addEventListener("click", ()=>{
+        let filter = element.querySelector("small").innerHTML
+        let profile = workersList.find(o => o.fullname === filter);
+        
+        profileModal.classList.replace("hidden", "block");
+    })
+);
+
 }
 
 /* AddWorker */
 document.getElementById("addBtn").addEventListener("click",addNewWorker);
-
+let i = 0;
 function addNewWorker(){    
-    let workersList = []
+    let workersList = getFromLocalStorage() || []
 
     let person={
-        id: `${document.getElementById("number").value}`*2,
+        id: i,
         fullname: `${document.getElementById("fullname").value}`,
         role: `${document.getElementById("role").value}`,
         number: `${document.getElementById("number").value}`,
         email: `${document.getElementById("email").value}`,
         experience: `${document.getElementById("experience").value}`,
     }
+    i++;
+
     document.querySelectorAll("input").forEach(input=> input.value="")
 
     workersList.push(person);
     addToLocalStorage(workersList)
     
 }
+
 document.getElementById("addExperienceBtn").addEventListener("click",addExp)
 function addExp(){
     console.log("enter");
@@ -92,3 +104,4 @@ function addExp(){
         '<input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">'
 
 }
+
