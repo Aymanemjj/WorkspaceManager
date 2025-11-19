@@ -66,16 +66,42 @@ document
     .forEach((element) => element.addEventListener("click", ()=>{
         let filter = element.querySelector("small").innerHTML
         let profile = workersList.find(o => o.fullname === filter);
-        
+        profileInfoBlock.innerHTML = ""
+        profileInfoBlock.innerHTML+=
+                    `<div class="flex gap-16">
+                        <div class="flex flex-col">
+                            <label for="fullName">FullName:</label>
+                            <h3 id="PMfullname">${profile.fullname}</h3> 
+                        </div>
+                        <div class="flex flex-col">
+                            <label for="role">Role:</label>
+                            <h3 id="PMrole">${profile.role}</h3>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="number">Phone Number:</label>
+                        <h3 id="PMnumber">${profile.number}</h3>
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <h3 id="PMemail">${profile.email}</h3>
+                    </div>
+                    <div id="expBlock">
+                        <label for="experience">Experience</label>
+                        <h3 id="PMexperience">${profile.experience}</h3>
+                    </div>`
         profileModal.classList.replace("hidden", "block");
     })
 );
 
 }
-
+const profileInfoBlock = document.getElementById("profileInfoBlock");
 /* AddWorker */
 document.getElementById("addBtn").addEventListener("click",addNewWorker);
 let i = 0;
+function forumVerification(){
+    
+}
 function addNewWorker(){    
     let workersList = getFromLocalStorage() || []
 

@@ -119,20 +119,22 @@
                     <div class="flex gap-2">
                         <div class="flex flex-col">
                             <label for="fullName">FullName:</label>
-                            <input id="fullname" type="text" placeholder="FullName" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                            <input id="fullname" name="fullName" type="text" placeholder="FullName" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
                         </div>
                         <div class="flex flex-col">
                             <label for="role">Role:</label>
-                            <input id="role" type="text" placeholder="Role" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                            <select id="role" name="role" placeholder="Role" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                                <option></option>
+                            </select>
                         </div>
                     </div>
                     <label for="number">Phone Number:</label>
-                    <input id="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <input id="number" name="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     <label for="email">Email</label>
-                    <input id="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <input id="email" name="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     <div id="expDiv" class="bg-[#68A17B] rounded-md flex flex-col gap-2 p-2 mt-2">
                         <label for="experience">Experience</label>
-                        <input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                        <input id="experience" name="xp" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     </div>
                 </form>
                 <div class="flex gap-2">
@@ -153,29 +155,7 @@
             </header>
             <div class="flex flex-col gap-2">
                 <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>                         
-                <div class="font-bold text-[#1e1e1e] flex flex-col gap-2 ">
-                    <div class="flex gap-16">
-                        <div class="flex flex-col">
-                            <label for="fullName">FullName:</label>
-                            <h3 id="PMfullname">Portgas D.Ace</h3> 
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="role">Role:</label>
-                            <h3 id="PMrole">Manager</h3>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="number">Phone Number:</label>
-                        <h3 id="PMnumber">0245842132</h3>
-                    </div>
-                    <div>
-                        <label for="email">Email</label>
-                        <h3 id="PMemail">portgasace@yahoo.com</h3>
-                    </div>
-                    <div id="expBlock">
-                        <label for="experience">Experience</label>
-                        <h3 id="PMexperience">7 Years in managment</h3>
-                    </div>
+                <div id="profileInfoBlock" class="font-bold text-[#1e1e1e] flex flex-col gap-2 ">
                 </div>
                 <div class="flex gap-2">
                         <button class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Edit</button>
