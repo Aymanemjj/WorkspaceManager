@@ -18,12 +18,12 @@ function openModal1() {
 
 document
     .querySelectorAll(".workerCard")
-    .forEach((element) => element.addEventListener("click", openModal2));
+    .forEach((element) => element.addEventListener("click", openModal2(element)));
 
 function openModal2(element) {
     console.log("enter");
     let filter = element.querySelector("small").innerHTML
-
+    
     profileModal.classList.replace("hidden", "block");
 }
 
@@ -41,17 +41,12 @@ function closeModal(event) {
 /* LocalStorage */
 function addToLocalStorage(list) {
     localStorage.setItem("workersList",JSON.stringify(list));
-    laodLocalStorage()
+    updateWorkersSection();
 }
 const workersListSection= document.getElementById("workersListSection") 
 
-function laodLocalStorage(){
-    let workersList =JSON.parse (localStorage.getItem("workersList"))
-    return workersList; 
-}
-
 function updateWorkersSection() { 
-    let workersList = laodLocalStorage()
+    let workersList =JSON.parse (localStorage.getItem("workersList"))
     workersList.forEach(worker =>
         workersListSection.innerHTML+=
             `<div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
@@ -73,7 +68,7 @@ function updateWorkersSection() {
 document.getElementById("addBtn").addEventListener("click",addNewWorker);
 
 function addNewWorker(){    
-    let workersList = laodLocalStorage()
+    let workersList = []
 
     let person={
         id: `${document.getElementById("number").value}`*2,
@@ -97,4 +92,3 @@ function addExp(){
         '<input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">'
 
 }
-    updateWorkersSection();
