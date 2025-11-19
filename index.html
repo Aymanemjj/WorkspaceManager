@@ -30,17 +30,7 @@
                     <button id="addWorkerBtn" class="bg-[#68A17B] p-2 rounded-sm w-full cursor-pointer hover:bg-[#4e8460]">Add Worker</button>
                     <input type="text" placeholder="find someone..." class="text-xs text-[#686f40] border-2 border-[#1E1E1E] rounded-sm p-2 w-full">
                 </div>
-                <div>
-                    <div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
-                        <div class="flex gap-2">
-                            <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
-                            <div class="flex flex-col">
-                                <small>FullName</small>
-                                <small>Role</small>
-                            </div>
-                        </div>
-                        <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
-                    </div>
+                <div id="workersListSection" class="flex flex-col gap-2">
                 </div>
             </div>
         </section>
@@ -140,12 +130,14 @@
                     <input id="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     <label for="email">Email</label>
                     <input id="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
-                    <label for="experience">Experience</label>
-                    <input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <div id="expDiv" class="bg-[#68A17B] rounded-md flex flex-col gap-2 p-2 mt-2">
+                        <label for="experience">Experience</label>
+                        <input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    </div>
                 </form>
                 <div class="flex gap-2">
-                        <button id="addExperienceBtn"  class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
-                        <button id="addWorkerBtn"  class="hover:bg-[#5d7a9e] bg-[#8EA1B8] p-2 border-2 border-[#1e1e1e] rounded-sm cursor-pointer"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+                        <button type="button" id="addBtn"  class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
+                        <button type="button" id="addExperienceBtn"  class="hover:bg-[#5d7a9e] bg-[#8EA1B8] p-2 border-2 border-[#1e1e1e] rounded-sm cursor-pointer"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
                     </div>
             </div>
         </div>
@@ -165,27 +157,24 @@
                     <div class="flex gap-16">
                         <div class="flex flex-col">
                             <label for="fullName">FullName:</label>
-                            <h3>Portgas D.Ace</h3> 
+                            <h3 id="PMfullname">Portgas D.Ace</h3> 
                         </div>
                         <div class="flex flex-col">
                             <label for="role">Role:</label>
-                            <h3>Manager</h3>
+                            <h3 id="PMrole">Manager</h3>
                         </div>
                     </div>
                     <div>
                         <label for="number">Phone Number:</label>
-                        <h3>0245842132</h3>
+                        <h3 id="PMnumber">0245842132</h3>
                     </div>
                     <div>
                         <label for="email">Email</label>
-                        <h3>portgasace@yahoo.com</h3>
+                        <h3 id="PMemail">portgasace@yahoo.com</h3>
                     </div>
                     <div>
                         <label for="experience">Experience</label>
-                        <h3>7 Years in managment</h3>
-                    </div>
-                    <div>
-                        <label></label>
+                        <h3 id="PMexperience">7 Years in managment</h3>
                     </div>
                 </div>
                 <div class="flex gap-2">
