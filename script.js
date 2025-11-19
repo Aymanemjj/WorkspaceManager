@@ -13,6 +13,7 @@ const closeModalBtn = document.getElementById("closeModalBtn1");
 
 const profileModal = document.getElementById("profileModal");
 
+document.getElementById("addWorkerBtn");
 
 
 
@@ -47,6 +48,19 @@ function updateWorkersSection() {
 function addNewWorker(){
     let worker = new Object()
 
-    addModal.querySelectorAll(".forumInput").forEach(element => worker.[`${element.id`])
+    addModal.querySelectorAll(".forumInput").forEach(element => {
+        let person ={
+            pfp : `${element.pfp}`,
+            name : `${element.fullname}`,
+            role : `${element.role}`,
+            number : `${element.number}`,
+            email : `${element.email}`,
+            experience : `${element.experience}`
+            
+        }
+        return(person)
+    })
+    worker.person;
+    console.log(worker);
     
 }
