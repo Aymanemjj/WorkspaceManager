@@ -5,6 +5,7 @@
 const addModal = document.getElementById("addModal");
 const closeModalBtn = document.getElementById("closeModalBtn1");
 const profileModal = document.getElementById("profileModal");
+const form = document.forms["ajoute"]
 
 
 
@@ -13,6 +14,7 @@ const profileModal = document.getElementById("profileModal");
 document.getElementById("addWorkerBtn").addEventListener("click", openModal1);
 
 function openModal1() {
+
     addModal.classList.replace("hidden", "block");
 }
 
@@ -34,7 +36,7 @@ function addToLocalStorage(list) {
     updateWorkersSection();
 }
 function getFromLocalStorage() {
-    let workersList = JSON.parse(localStorage.getItem("workersList"))
+    let workersList = JSON.parse(localStorage.getItem("workersList")) || []
     return workersList;
 }
 
@@ -45,15 +47,14 @@ function updateWorkersSection() {
     workersListSection.innerHTML = ""
     workersList.forEach(worker =>
         workersListSection.innerHTML +=
-        `<div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
-                <div class="flex gap-2">
-                    <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+        `<div class="workerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
+                <div class="flex lg:flex-row flex-col gap-2">
+                    <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
                     <div class="flex flex-col">
-                        <small>${worker.fullname}</small>
+                        <small class="font-bold">${worker.fullname}</small>
                         <small>${worker.role}</small>
                     </div>
                 </div>
-                <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
             </div>`
 
     )
@@ -84,17 +85,19 @@ function updateWorkersSection() {
                         <h3 id="PMemail">${profile.email}</h3>
                     </div>`
 
-            let Plength = profile.experience.length
-            console.log(Plength);
-
             let expBlock = document.getElementById("expBlock")
             expBlock.innerHTML = ""
-            expBlock.innerHTML += "<h2 class='font-bold'>Experience</h2>"
-            for (let i = 0; i < Plength; i++) {
-                console.log("enter");
-
-                expBlock.innerHTML += `<h3>test</h3>`
+            
+            if(profile.experience.length === 0){
+                expBlock.innerHTML+= "<h3>No experience</h3>"
+            }else{
+                profile.experience.forEach(xp=>{
+                    expBlock.innerHTML+= `<h3>-${xp}</h3>`
+                })
             }
+            
+            
+
             profileModal.classList.replace("hidden", "block");
         })
         );
@@ -102,48 +105,47 @@ function updateWorkersSection() {
 }
 const profileInfoBlock = document.getElementById("profileInfoBlock");
 /* AddWorker */
-document.getElementById("addBtn").addEventListener("submit", (e) => {
-    console.log("enter");
+form.addEventListener("submit", (e) => {
     
     e.preventDefault()
     formValidation()
 });
+
 let i = 0;
 /* form validation */
 function formValidation() {
-    console.log("enter");
     
     const fullNameV = form.fullName.value
     const numberV = form.number.value
     const emailV = form.email.value
 
-    const result1 = fullNameV.test(/[^a-z\s]+/gi)
-    if(resul == 1){
+    const result1 = /^[a-z\s]+$/i.test(fullNameV)
+    const result2= /(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/g.test(numberV)
+    const result3= /^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/i.test(emailV)
+
+    if(result1){
         inputCorrect(form.fullName)
     }else{
         inputError(form.fullName)
     }
     
-    const result2= numberV.test(/(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/g)
-    if (result2 == 1) {
+    if (result2) {
         inputCorrect(form.number)
     }else{
         inputError(form.number)
     }
-    const result3= emailV.test(/^[\w-.]+@([\w-]+.)+[\w-]{2,}$/gm)
-    if (result3 == 1) {
+
+    if (result3) {
         inputCorrect(form.email)
     }else{
         inputError(form.email)
     }
 
-    if(result1&&result2&&result3==1){
+    if(result1&&result2&&result3){
         addNewWorker()
-    }else{
-        console.log("error in form");
-        
     }
 }
+
 function inputError(input){
     input.style.border= "2px solid #8e2a18";
 }
@@ -152,10 +154,9 @@ function inputCorrect(input){
 }
 
 /* add New Worker */
-let form = document.forms["ajoute"]
 
 function addNewWorker() {
-    let workersList = getFromLocalStorage() || []
+    let workersList = getFromLocalStorage() 
     let person = {
         id: i,
         fullname: form.fullName.value,
@@ -165,14 +166,21 @@ function addNewWorker() {
         experience: [],
     }
 
-
-    for (let i = 0; i < form.experiences.length; i++) {
-        person.experience.push(form.experiences[i].value)
+    
+    if(form.experiences instanceof NodeList){
+        console.log("enter condition");
+        form.experiences.forEach(xp => {
+            person.experience.push(xp.value)
+        })
+    }else{
+        person.experience.push(form.experiences.value) 
     }
     i++;
 
     document.querySelectorAll("input").forEach(input => input.value = "")
-
+    document.getElementById("expDiv").innerHTML =
+        `<label for="experience">Experience</label>
+        <input name="experiences" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">`
     workersList.push(person);
     addToLocalStorage(workersList)
 
@@ -182,14 +190,14 @@ document.getElementById("addExperienceBtn").addEventListener("click", addExp)
 
 function addExp() {
     document.getElementById("expDiv").innerHTML +=
-        `<input id="experience" name="experiences" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">`
+        `<input  name="experiences" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">`
 
 
 }
 
 const displayWorkersModalBtn = document.querySelectorAll(".displayWorkersModal")
     .forEach(element => element.addEventListener("click", displayWorkersModalContent))
-const displayWorkersModal = document.getElementById("displayWorkersModal")
+const workersModal = document.getElementById("workersModal")
 const workersDisplayBlock = document.getElementById("workersDisplayBlock")
 
 function displayWorkersModalContent() {
@@ -199,19 +207,24 @@ function displayWorkersModalContent() {
     workersDisplayBlock.innerHTML = ""
     workersList.forEach(worker =>
         workersDisplayBlock.innerHTML +=
-        `<div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
-                <div class="flex gap-2">
-                    <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
-                    <div class="flex flex-col">
-                        <small>${worker.fullname}</small>
-                        <small>${worker.role}</small>
-                    </div>
+        `<div class="smallWorkerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
+            <div class="flex lg:flex-row flex-col gap-2">
+                <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                <div class="flex flex-col">
+                    <small class="font-bold">${worker.fullname}</small>
+                    <small>${worker.role}</small>
                 </div>
-                <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
-            </div>`)
+            </div>
+        </div>`
+        )
     displayWorkersModalDisplay()
 }
 
 function displayWorkersModalDisplay() {
-    displayWorkersModal.classList.replace("hidden", "block")
+    workersModal.classList.replace("hidden", "block")
+}
+
+
+function addToZone(){
+
 }
