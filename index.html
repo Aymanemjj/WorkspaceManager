@@ -164,15 +164,15 @@
                 <div>
                     <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>                      
                 </div>    
-                <form class="font-bold text-[#1e1e1e] flex flex-col ">
+                <form name="ajoute" class="font-bold text-[#1e1e1e] flex flex-col ">
                     <div class="flex gap-2">
                         <div class="flex flex-col">
                             <label for="fullName">FullName:</label>
-                            <input id="fullname" name="fullName" type="text" placeholder="FullName" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                            <input required id="fullname" name="fullName" type="text" placeholder="FullName" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
                         </div>
                         <div class="flex flex-col">
                             <label for="role">Role:</label>
-                            <select id="role" name="role" placeholder="Role" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                            <select required id="role" name="role" placeholder="Role" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
                                 <option value="Autres rôle">Autres rôle</option>
                                 <option value="Réceptionniste">Réceptionniste</option>
                                 <option value="Technicien">Technicien</option>
@@ -183,18 +183,19 @@
                         </div>
                     </div>
                     <label for="number">Phone Number:</label>
-                    <input id="number" name="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <input required id="number" name="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                    <input required id="email" name="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     <div id="expDiv" class="bg-[#68A17B] rounded-md flex flex-col gap-2 p-2 mt-2">
                         <label for="experience">Experience</label>
-                        <input id="experience" name="xp" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
+                        <input required id="experience" name="experiences" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     </div>
-                </form>
-                <div class="flex gap-2">
-                        <button type="button" id="addBtn"  class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
+                    <div class="flex gap-2 mt-2">
+                        <button type="submit" id="addBtn"  class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Add</button>
                         <button type="button" id="addExperienceBtn"  class="hover:bg-[#5d7a9e] bg-[#8EA1B8] p-2 border-2 border-[#1e1e1e] rounded-sm cursor-pointer"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
                     </div>
+                </form>
+                
             </div>
         </div>
     </section>
@@ -210,6 +211,9 @@
             <div class="flex flex-col gap-2">
                 <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>                         
                 <div id="profileInfoBlock" class=" text-[#1e1e1e] flex flex-col gap-2 ">
+                </div>
+                <div id="expBlock" class="bg-[#68A17B] w-full h-fit p-2 rounded-md">
+
                 </div>
                 <div class="flex gap-2">
                     <button class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Edit</button>
