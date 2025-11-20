@@ -88,7 +88,7 @@ document
                     </div>
                     <div id="expBlock">
                         <label class="font-bold" for="experience">Experience</label>
-                        <h3 id="PMexperience">${profile.experience}</h3>
+                        <h3 id="PMexperience">${profile.experience[0]}</h3>
                     </div>`
         profileModal.classList.replace("hidden", "block");
     })
@@ -101,18 +101,25 @@ document.getElementById("addBtn").addEventListener("click",addNewWorker);
 let i = 0;
 function forumVerification(){
     
+    let state
+    return state
 }
 function addNewWorker(){    
-    let workersList = getFromLocalStorage() || []
-
+/*     let state=forumVerification
+ */    let workersList = getFromLocalStorage() || []
+    
     let person={
         id: i,
         fullname: `${document.getElementById("fullname").value}`,
         role: `${document.getElementById("role").value}`,
         number: `${document.getElementById("number").value}`,
         email: `${document.getElementById("email").value}`,
-        experience: `${document.getElementById("experience").value}`,
+        experience:[],
     }
+    for(let i =0; i<=xpCount;i++){
+        person.experience.push(`${document.getElementById(`experience${xpCount}`,)}`)
+    }
+    xpCount=0
     i++;
 
     document.querySelectorAll("input").forEach(input=> input.value="")
@@ -123,11 +130,40 @@ function addNewWorker(){
 }
 
 document.getElementById("addExperienceBtn").addEventListener("click",addExp)
+let xpCount=0
 function addExp(){
     console.log("enter");
-    
     document.getElementById("expDiv").innerHTML+=
-        '<input id="experience" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">'
+        `<input id="experience${xpCount}" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">`
+    xpCount++
 
 }
 
+const displayWorkersModalBtn = document.querySelectorAll(".displayWorkersModal")
+.forEach(element=>element.addEventListener("click",displayWorkersModalContent))
+const displayWorkersModal = document.getElementById("displayWorkersModal")
+const workersDisplayBlock = document.getElementById("workersDisplayBlock")
+
+function displayWorkersModalContent(){
+    console.log("enter");
+    
+    let workersList = getFromLocalStorage()
+    workersDisplayBlock.innerHTML=""
+    workersList.forEach(worker =>
+        workersDisplayBlock.innerHTML+=
+            `<div class="workerCard bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex justify-between gap-2 p-1 cursor-pointer">
+                <div class="flex gap-2">
+                    <div class="bg-[#FAFCEE] border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                    <div class="flex flex-col">
+                        <small>${worker.fullname}</small>
+                        <small>${worker.role}</small>
+                    </div>
+                </div>
+                <button  class="addToBoardBtn hover:bg-[#8EA1B8] cursor-pointer rounded-sm"><i class="fa-regular fa-square-plus" style="color: #1e1e1e;"></i></button>
+            </div>`)
+        displayWorkersModalDisplay()
+}
+
+function displayWorkersModalDisplay(){
+    displayWorkersModal.classList.replace("hidden","block")
+}
