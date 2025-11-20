@@ -24,12 +24,12 @@
     <!-- bodySection -->
     <section class="grid grid-flow-col grid-cols-8">
         <!-- sidePanel -->
-        <section class="border-2 border-[#1E1E1E] rounded-md col-span-2 p-2">
-            <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-2">
-                    <button id="addWorkerBtn" class="bg-[#68A17B] p-2 rounded-sm w-full cursor-pointer hover:bg-[#4e8460]">Add Worker</button>
-                    <input type="text" placeholder="find someone..." class="text-xs text-[#686f40] border-2 border-[#1E1E1E] rounded-sm p-2 w-full">
-                </div>
+        <section class=" flex flex-col gap-2 border-2 border-[#1E1E1E] rounded-md col-span-2 p-2 h-fit max-h-2/3 overflow-y-scroll">
+            <div class="flex flex-col bg-[#FAFCEE] gap-2 sticky top-1">
+                <button id="addWorkerBtn" class="bg-[#68A17B] p-2 rounded-sm w-full cursor-pointer hover:bg-[#4e8460]">Add Worker</button>
+                <input type="text" placeholder="find someone..." class="text-xs text-[#686f40] border-2 border-[#1E1E1E] rounded-sm p-2 w-full">
+            </div>
+            <div class="flex flex-col gap-4 h-fit">
                 <div id="workersListSection" class="flex flex-col gap-2">
                 </div>
             </div>
@@ -39,49 +39,82 @@
         <!-- mainSection -->
         <section class="border-2 border-[#1E1E1E] rounded-md col-span-5 p-2 flex flex-col gap-4 ">
             <!-- roomSection -->
-            <div class="col-span-5  grid grid-cols-11 grid-rows-3 bg-[url(Workspace.png)] bg-contain bg-no-repeat h-120">
-                <div id="meeting" class="col-span-4">
-                    <div class="flex gap-4 justify-center mt-4">
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+            <div class="col-span-5  grid grid-cols-3 grid-rows-2 gap-4  h-fit">
+                <div id="meeting" class="col-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="flex flex-col gap-2 justify-center w-full h-fit">
+                        <h3>Meeting Room <span>(max: 8)</span></h3>
+                        <div class="bg-[#68A17B] border-2 border-[#1E1E1E] rounded-sm p-1 flex justify-between">
+                            <div class="flex flex-col gap-1">
+                                <small>name</small>
+                                <small>role</small>
+                            </div>
+                            <button type="button" class="hover:bg-[#3f664c] p-0.1 rounded-sm"><i class="fa-regular fa-square-minus fa-lg" style="color: #1E1E1E;"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-span-2 row-span-3 "></div>
-                <div id="archive" class="col-span-2 ">
-                    <div class="flex gap-4 justify-center mt-4">
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                <div id="archive" class="col-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="flex flex-col gap-2 justify-center w-full h-fit">
+                        <h3>Archive Room</h3>
+                        <h4>(max: 2)</h4>
+                        <div class="bg-[#68A17B] border-2 border-[#1E1E1E] rounded-sm p-1 flex justify-between">
+                            <div class="flex flex-col gap-1">
+                                <small>name</small>
+                                <small>role</small>
+                            </div>
+                            <button type="button" class="hover:bg-[#3f664c] p-0.1 rounded-sm"><i class="fa-regular fa-square-minus fa-lg" style="color: #1E1E1E;"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-span-1 row-span-1 "></div>
-                <div id="security" class="col-span-2 ">
-                    <div class="flex gap-4 justify-center mt-4">
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                <div id="security" class="col-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="flex flex-col gap-2 justify-center w-full h-fit">
+                        <h3>Security Room</h3>
+                        <h4>(max: 1)</h4>
+                        <div class="bg-[#68A17B] border-2 border-[#1E1E1E] rounded-sm p-1 flex justify-between">
+                            <div class="flex flex-col gap-1">
+                                <small>name</small>
+                                <small>role</small>
+                            </div>
+                            <button type="button" class="hover:bg-[#3f664c] p-0.1 rounded-sm"><i class="fa-regular fa-square-minus fa-lg" style="color: #1E1E1E;"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div id="reception" class="col-span-4 row-span-2 ">
-                    <div class="flex gap-4 justify-center mt-4">
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                <div id="reception" class="col-span-1 row-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="flex flex-col gap-2 justify-center w-full h-fit">
+                        <h3>Reception Room</h3>
+                        <h4>(max: 1)</h4>
+                        <div class="bg-[#68A17B] border-2 border-[#1E1E1E] rounded-sm p-1 flex justify-between">
+                            <div class="flex flex-col gap-1">
+                                <small>name</small>
+                                <small>role</small>
+                            </div>
+                            <button type="button" class="hover:bg-[#3f664c] p-0.1 rounded-sm"><i class="fa-regular fa-square-minus fa-lg" style="color: #1E1E1E;"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-span-5"></div>
-                <div id="rest" class="col-span-2 ">
-                    <div class="flex gap-4 justify-center mt-4">
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                <div id="break" class="col-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="flex flex-col gap-2 justify-center w-full h-fit">
+                        <h3>Break Room</h3>
+                        <h4>(max: 3)</h4>
+                        <div class="bg-[#68A17B] border-2 border-[#1E1E1E] rounded-sm p-1 flex justify-between">
+                            <div class="flex flex-col gap-1">
+                                <small>name</small>
+                                <small>role</small>
+                            </div>
+                            <button type="button" class="hover:bg-[#3f664c] p-0.1 rounded-sm"><i class="fa-regular fa-square-minus fa-lg" style="color: #1E1E1E;"></i></button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-span-1 "></div>
-                <div id="servers" class="col-span-2">
-                    <div class="flex gap-4 justify-center mt-4">
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
-                        <div class="border-2 border-red-600 size-12 rounded-full"></div>
+                <div id="servers" class="col-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1">
+                    <div class="flex flex-col gap-2 justify-center w-full h-fit">
+                        <h3>Servers Room</h3>
+                        <h4>(max: 1)</h4>
+                        <div class="bg-[#68A17B] border-2 border-[#1E1E1E] rounded-sm p-1 flex justify-between">
+                            <div class="flex flex-col gap-1">
+                                <small>name</small>
+                                <small>role</small>
+                            </div>
+                            <button type="button" class="hover:bg-[#3f664c] p-0.1 rounded-sm"><i class="fa-regular fa-square-minus fa-lg" style="color: #1E1E1E;"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,7 +157,12 @@
                         <div class="flex flex-col">
                             <label for="role">Role:</label>
                             <select id="role" name="role" placeholder="Role" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
-                                <option></option>
+                                <option value="Autres rôle">Autres rôle</option>
+                                <option value="Réceptionniste">Réceptionniste</option>
+                                <option value="Technicien">Technicien</option>
+                                <option value="Agent de sécurité">Agent de sécurité</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Nettoyage">Nettoyage</option>
                             </select>
                         </div>
                     </div>
@@ -155,7 +193,7 @@
             </header>
             <div class="flex flex-col gap-2">
                 <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>                         
-                <div id="profileInfoBlock" class="font-bold text-[#1e1e1e] flex flex-col gap-2 ">
+                <div id="profileInfoBlock" class=" text-[#1e1e1e] flex flex-col gap-2 ">
                 </div>
                 <div class="flex gap-2">
                         <button class="hover:bg-[#48825b] bg-[#68A17B] p-2 border-2 border-[#1e1e1e] rounded-sm w-full cursor-pointer">Edit</button>

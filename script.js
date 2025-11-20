@@ -70,24 +70,24 @@ document
         profileInfoBlock.innerHTML+=
                     `<div class="flex gap-16">
                         <div class="flex flex-col">
-                            <label for="fullName">FullName:</label>
+                            <label class="font-bold" for="fullName">FullName:</label>
                             <h3 id="PMfullname">${profile.fullname}</h3> 
                         </div>
                         <div class="flex flex-col">
-                            <label for="role">Role:</label>
+                            <label class="font-bold" for="role">Role:</label>
                             <h3 id="PMrole">${profile.role}</h3>
                         </div>
                     </div>
                     <div>
-                        <label for="number">Phone Number:</label>
+                        <label class="font-bold" for="number">Phone Number:</label>
                         <h3 id="PMnumber">${profile.number}</h3>
                     </div>
                     <div>
-                        <label for="email">Email</label>
+                        <label class="font-bold" for="email">Email</label>
                         <h3 id="PMemail">${profile.email}</h3>
                     </div>
                     <div id="expBlock">
-                        <label for="experience">Experience</label>
+                        <label class="font-bold" for="experience">Experience</label>
                         <h3 id="PMexperience">${profile.experience}</h3>
                     </div>`
         profileModal.classList.replace("hidden", "block");
