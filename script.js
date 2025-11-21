@@ -195,19 +195,25 @@ function addExp() {
 
 }
 
+let chosenZone;
 const displayWorkersModalBtn = document.querySelectorAll(".displayWorkersModal")
-    .forEach(element => element.addEventListener("click", displayWorkersModalContent))
-const workersModal = document.getElementById("workersModal")
+    .forEach(element =>element.addEventListener(
+        "click",()=>{
+            chosenZone=element.parentElement.parentElement
+            WorkersModalContent()
+        }
+    ))
+
+        const workersModal = document.getElementById("workersModal")
 const workersDisplayBlock = document.getElementById("workersDisplayBlock")
 
-function displayWorkersModalContent() {
-    console.log("enter");
+function WorkersModalContent() {
 
     let workersList = getFromLocalStorage()
     workersDisplayBlock.innerHTML = ""
     workersList.forEach(worker =>
         workersDisplayBlock.innerHTML +=
-        `<div class="smallWorkerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
+        `<div class="UsmallWorkerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
             <div class="flex lg:flex-row flex-col gap-2">
                 <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
                 <div class="flex flex-col">
@@ -217,14 +223,86 @@ function displayWorkersModalContent() {
             </div>
         </div>`
         )
-    displayWorkersModalDisplay()
+    document.querySelectorAll(".UsmallWorkerCard").forEach(
+        element=>element.addEventListener(
+            "click",()=>addToZone(element)
+        ))
+    WorkersModalDisplay()
 }
 
-function displayWorkersModalDisplay() {
+function WorkersModalDisplay() {
     workersModal.classList.replace("hidden", "block")
 }
 
 
-function addToZone(){
+function addToZone(element){
+    const workersList = getFromLocalStorage()
+    let filter = element.querySelector("small").innerHTML
+    let profile = workersList.find(o => o.fullname === filter);
+    const workerZoneC = chosenZone.querySelector(".workerZone").childElementCount
+    const workerZone = chosenZone.querySelector(".workerZone")
+    let worker = `
+        <div class="AsmallWorkerCard hover:animate-bounce bg-[#68A17B] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
+            <div class="flex lg:flex-row flex-col gap-2">
+                <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                <div class="flex flex-col">
+                    <small class="font-bold">${profile.fullname}</small>
+                    <small>${profile.role}</small>
+                </div>
+            </div>
+        </div>`
 
+    switch (chosenZone.id) {
+        case "meeting":
+            if(workerZoneC < 8){
+                workerZone.innerHTML+=worker;
+            }else{
+                alert("Zone is full. Consider removing before adding another");
+            }
+            break;
+        case "archive":
+            if(profile.role =="Nettoyage"||"Autres rôle"){
+                alert("This worker isn't fit")
+            }else if(workerZoneC <2){
+                workerZone.innerHTML+=worker;
+            }else{
+                alert("Zone is full. Consider removing before adding another");
+            }
+            break;
+        case "security":
+            if(profile.role == "sécurité"||"Manager"||"Nettoyage"){
+                alert("This worker isn't fit")
+            }else if(workerZoneC <1){
+                workerZone.innerHTML+=worker;
+            }else{
+                alert("Zone is full. Consider removing before adding another");
+            }
+            break;
+        case "reception":
+            if(profile.role =="Réceptionniste"||"Manager"||"Nettoyage"){
+                alert("This worker isn't fit")
+            }else if(workerZoneC <2){
+                workerZone.innerHTML+=worker;
+            }else{
+                alert("Zone is full. Consider removing before adding another");
+            }
+            break;
+        case "break":
+            if(workerZoneC < 4){
+                workerZone.innerHTML+=worker;
+            }else{
+                alert("Zone is full. Consider removing before adding another");
+            }
+            break;
+        case "servers":
+            if(profile.role ==="Technicien"||"Manager"||"Nettoyage"){
+                alert("This worker isn't fit")
+            }else if(workerZoneC <=1){
+                workerZone.innerHTML+=worker;
+            }else{
+                alert("Zone is full. Consider removing before adding another");
+            }
+            break;
+    }
+    
 }
