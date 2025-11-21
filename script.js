@@ -90,8 +90,7 @@ function updateWorkersSection() {
         .forEach((element) => element.addEventListener("click", () => {
             let filter = element.querySelector("small").innerHTML
             let profile = workersList.find(o => o.fullname === filter);
-            profileInfoBlock.innerHTML = ""
-            profileInfoBlock.innerHTML +=
+            profileInfoBlock.innerHTML =
                 `<div class="flex gap-16">
                         <div class="flex flex-col">
                             <label class="font-bold" for="fullName">FullName:</label>
@@ -303,6 +302,7 @@ function addToZone(element){
     let order = workersList.indexOf(profile)
     const workerZoneC = chosenZone.querySelector(".workerZone").childElementCount
     const workerZone = chosenZone.querySelector(".workerZone")
+    let state=true;
     let worker = `
         <div class="AsmallWorkerCard hover:animate-bounce bg-[#68A17B] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
             <div class="flex justify-between">
@@ -323,6 +323,7 @@ function addToZone(element){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
+                state=false
             }
             break;
         case "archive":
@@ -332,6 +333,7 @@ function addToZone(element){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
+                state=false
             }
             break;
         case "security":
@@ -341,6 +343,7 @@ function addToZone(element){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
+                state=false
             }
             break;
         case "reception":
@@ -350,6 +353,7 @@ function addToZone(element){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
+                state=false
             }
             break;
         case "break":
@@ -357,6 +361,7 @@ function addToZone(element){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
+                state=false
             }
             break;
         case "servers":
@@ -366,6 +371,7 @@ function addToZone(element){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
+                state=false
             }
             break;
     }
@@ -374,24 +380,32 @@ function addToZone(element){
     document.querySelectorAll(".removeWorkerBtn").forEach(
         Btn=> Btn.addEventListener("click",()=>removeWorkerFromZone(Btn)))
 
-
-    let table = JSON.parse(localStorage.getItem(`${chosenZone.id}List`)) || []    
-    table.push(profile)
-    workersList.splice(order,1)
-    addToLocalStorage(workersList)
-    addToLocalStorageZone(chosenZone.id,table)
-    WorkersModalContent()
+    if(state){
+        let table = JSON.parse(localStorage.getItem(`${chosenZone.id}List`)) || []    
+        table.push(profile)
+        workersList.splice(order,1)
+        addToLocalStorage(workersList)
+        addToLocalStorageZone(chosenZone.id,table)
+        WorkersModalContent()
+    }
+    
 }
 
 
 function checkStatus(){
+    
+    
     document.querySelectorAll(".workerZoneV").forEach(
-        (element) =>{ 
-            if(element.innerHTML == ""){
-                element.parentElement.classList.replace("border-[#1E1E1E]","border-red-500")
+        (node) =>{ 
+            if(node.length == 0){      
+                console.log("enter");         
+                node.parentNode.classList.replace("border-[#1E1E1E]","border-red-500")
+            }else{
+                node.parentNode.classList.replace("border-red-500","border-[#1E1E1E]")
             }
         })
-        
+    
+    
 }
 checkStatus()
 
@@ -399,14 +413,25 @@ checkStatus()
 function removeWorkerFromZone(Btn){
     let container = Btn.parentElement.parentElement;
     let workersList = JSON.parse(localStorage.getItem("workersList"))
-    let filter = 
-    let profile = workersList.filter()
+
+    let zone= container.parentElement.parentElement.id
+    let zoneList = JSON.parse(localStorage.getItem(`${zone}List`))
+
+    let filter = Btn.parentElement.querySelector("small").innerHTML
+    let profile = zoneList.find(o => o.fullname === filter)
+
+    let order = zoneList.indexOf(profile)
+
+    console.log(zone);
 
     container.remove();
-    let zone= container.parentElement.parentElement.id
-    console.log(zone);
-    
-    let zoneList = JSON.parse(localStorage.getItem(`${zone}List`))
-    let order = zoneList.indexOf()
+    zoneList.splice(order,1)
+    workersList.push(profile)
+
+
+    addToLocalStorage(workersList)
+    addToLocalStorageZone(zone,zoneList)
+    WorkersModalContent()
+
     
 }
