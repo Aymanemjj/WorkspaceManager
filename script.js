@@ -204,14 +204,35 @@ const displayWorkersModalBtn = document.querySelectorAll(".displayWorkersModal")
         }
     ))
 
-        const workersModal = document.getElementById("workersModal")
+const workersModal = document.getElementById("workersModal")
 const workersDisplayBlock = document.getElementById("workersDisplayBlock")
+
+function EworkersList(){
+    let workersList = getFromLocalStorage()
+
+    switch (chosenZone.id) {
+        case "meeting"||"break":
+            break;
+        case "archive":
+            workersList = workersList.filter(o=>o.rol !=="nettoyage"||"autres rôle")
+            break;
+        case "security":
+            workersList = workersList.filter(o=>o.role ==="sécurité"||"manager"||"nettoyage")
+            break;
+        case "reception":
+            workersList = workersList.filter(o=>o.role ==="réceptionniste"||"manager"||"nettoyage")
+            break;
+        case "server":
+            workersList = workersList.filter(o=>o.role ==="technicien"||"manager"||"nettoyage")
+    }
+    return workersList
+}
 
 function WorkersModalContent() {
 
-    let workersList = getFromLocalStorage()
+    let EworkersList = EworkersList()
     workersDisplayBlock.innerHTML = ""
-    workersList.forEach(worker =>
+    EworkersList.forEach(worker =>
         workersDisplayBlock.innerHTML +=
         `<div class="UsmallWorkerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
             <div class="flex lg:flex-row flex-col gap-2">
@@ -229,6 +250,8 @@ function WorkersModalContent() {
         ))
     WorkersModalDisplay()
 }
+
+
 
 function WorkersModalDisplay() {
     workersModal.classList.replace("hidden", "block")
@@ -261,7 +284,7 @@ function addToZone(element){
             }
             break;
         case "archive":
-            if(profile.role =="Nettoyage"||"Autres rôle"){
+            if(profile.role =="nettoyage"||"autres rôle"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <2){
                 workerZone.innerHTML+=worker;
@@ -270,7 +293,7 @@ function addToZone(element){
             }
             break;
         case "security":
-            if(profile.role == "sécurité"||"Manager"||"Nettoyage"){
+            if(profile.role == "sécurité"||"manager"||"nettoyage"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <1){
                 workerZone.innerHTML+=worker;
@@ -279,7 +302,7 @@ function addToZone(element){
             }
             break;
         case "reception":
-            if(profile.role =="Réceptionniste"||"Manager"||"Nettoyage"){
+            if(profile.role =="réceptionniste"||"manager"||"nettoyage"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <2){
                 workerZone.innerHTML+=worker;
@@ -295,7 +318,7 @@ function addToZone(element){
             }
             break;
         case "servers":
-            if(profile.role ==="Technicien"||"Manager"||"Nettoyage"){
+            if(profile.role ==="technicien"||"manager"||"nettoyage"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <=1){
                 workerZone.innerHTML+=worker;
@@ -306,3 +329,14 @@ function addToZone(element){
     }
     
 }
+
+
+function checkStatus(){
+    document.querySelectorAll(".workerZoneV").forEach(
+        (element) =>{ 
+            if(element.innerHTML == ""){
+                element.parentElement.classList.replace("border-[#1E1E1E]","border-red-500")
+            }
+        })
+}
+checkStatus()
