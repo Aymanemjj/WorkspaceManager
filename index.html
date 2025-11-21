@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
@@ -15,30 +16,30 @@
     <link rel="shortcut icon" type="img/x-icon" href="img/logo.webp">
     <title>WorkStaff Manager</title>
 </head>
-<body onload="updateWorkersSection()" class="p-2 bg-[#FAFCEE] flex flex-col gap-4">
+<body onload="updateWorkersSection()" class="h-screen  p-2 bg-[#FAFCEE] flex flex-col gap-4">
     <!-- header -->
     <header class="border-2 border-[#1E1E1E] rounded-md p-2">
         <div class="font-extrabold text-xl flex justify-center ">
-            <logo class="text-[#1E1E1E]">Work<span class="text-[#68A17B]">Staff</span></logo>
+            <h1 class="text-[#1E1E1E]">Work<span class="text-[#68A17B]">Staff</span></h1>
         </div>
     </header>
     <!-- bodySection -->
-    <section class=" grid grid-flow-col grid-cols-8">
+    <div class="sm:grid sm:grid-flow-col sm:grid-cols-8 flex flex-col gap-2">
         <!-- sidePanel -->
-        <section class=" flex flex-col gap-2 border-2 border-[#1E1E1E] rounded-md col-span-2 h-fit p-2 ">
+        <div class=" flex flex-col gap-2 border-2 border-[#1E1E1E] rounded-md w-screen sm:w-auto sm:col-span-2 sm:h-fit sm:max-h-4/5 p-2 ">
             <div class="flex flex-col bg-[#FAFCEE] gap-2 sticky top-1">
                 <button id="addWorkerBtn" class="bg-[#68A17B] p-2 rounded-sm w-full cursor-pointer hover:bg-[#4e8460]">Add Worker</button>
                 <input type="text" placeholder="find someone..." class="text-xs text-[#686f40] border-2 border-[#1E1E1E] rounded-sm p-2 w-full">
             </div>
-            <div class="flex flex-col gap-4 h-fit max-h-2/3 overflow-y-scroll">
-                <div id="workersListSection" class="flex flex-col gap-2">
+            <div class="max-h-screen overflow-y-scroll">
+                <div id="workersListSection" class="flex sm:flex-col overflow-x-scroll gap-2">
                 </div>
             </div>
-        </section>
+        </div>
         <!-- space -->
-        <div class="col-span-1"></div>
+        <div class="sm:col-span-1"></div>
         <!-- mainSection -->
-        <section class="border-2 border-[#1E1E1E] rounded-md col-span-5 p-2 flex flex-col gap-4">
+        <div class="border-2 border-[#1E1E1E] rounded-md col-span-5 p-2 flex flex-col gap-4 h-fit">
             <!-- roomSection -->
             <div class="col-span-5  grid lg:grid-cols-3 grid-cols-1 gap-4  h-fit">
                 <div id="meeting" class="col-span-1 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-1 flex flex-col gap-2 justify-center w-full h-fit">
@@ -108,11 +109,11 @@
                     </div>
                 </div>
             </div>
-        </section>
-    </section>
+        </div>
+    </div>
     <!-- addModal -->
     <section id="addModal"  class="hidden">
-        <div  class=" block place-self-center fixed  z-0 w-fit bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2">
+        <div  class=" block sm:absolute sm:top-50 sm:left-125  z-0 sm:w-fit w-full bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2">
             <header>
                 <div class="flex justify-between">
                     <h2>Add worker</h2>
@@ -121,17 +122,17 @@
             </header>
             <div class="flex flex-col gap-2">
                 <div>
-                    <div class="size-16 bg-[#8EA1B8] border-2 border-[#1e1e1e] rounded-sm"></div>                      
+                    <div class="size-16 bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1e1e1e] rounded-sm"></div>                      
                 </div>    
                 <form name="ajoute" class="font-bold text-[#1e1e1e] flex flex-col ">
-                    <div class="flex gap-2">
+                    <div class="flex flex-col sm:flex-row gap-2">
                         <div class="flex flex-col">
-                            <label for="fullName">FullName:</label>
+                            <label >FullName:</label>
                             <input   name="fullName" type="text" placeholder="FullName" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
                         </div>
                         <div class="flex flex-col">
-                            <label for="role">Role:</label>
-                            <select   name="role" placeholder="Role" class="forumInput cursor-pointer bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
+                            <label>Role:</label>
+                            <select   name="role"  class="forumInput cursor-pointer bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm"> 
                                 <option value="autres rôle">Autres rôle</option>
                                 <option value="réceptionniste">Réceptionniste</option>
                                 <option value="technicien">Technicien</option>
@@ -141,12 +142,12 @@
                             </select>
                         </div>
                     </div>
-                    <label for="number">Phone Number:</label>
+                    <label>Phone Number:</label>
                     <input   name="number" type="text" placeholder="PhoneNumber" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
-                    <label for="email">Email</label>
+                    <label>Email</label>
                     <input   name="email" type="text" placeholder="Email" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     <div id="expDiv" class="bg-[#68A17B] rounded-md flex flex-col gap-2 p-2 mt-2">
-                        <label for="experience">Experience</label>
+                        <label>Experience</label>
                         <input name="experiences" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">
                     </div>
                     <div class="flex gap-2 mt-2">
@@ -160,7 +161,7 @@
     </section>
     <!-- profileDetailModal -->
     <section id="profileModal" class="hidden">
-        <div  class="place-self-center mt-24 block fixed z-0 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2 w-fit ">
+        <div  class="sm:absolute sm:top-50 sm:left-125  block  z-0 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2 sm:w-fit w-full ">
             <header class="m-2">
                 <div class="flex justify-between">
                     <h2>Details</h2>
@@ -185,7 +186,7 @@
     </section>
     <!-- addToSectionModal -->
     <section id="workersModal" class="hidden">
-        <div class="place-self-center mt-24 block fixed z-0 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2 w-fit ">
+        <div class="sm:absolute sm:top-150 sm:left-125  block  z-0 bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md p-2 sm:w-fit w-screen">
             <header class="m-2">
                 <div class="flex justify-between">
                     <h2>Details</h2>
@@ -193,7 +194,7 @@
                 </div>
             </header>
                 <div>
-                    <div id="workersDisplayBlock" class="grid grid-flow-row grid-cols-3 gap-2">
+                    <div id="workersDisplayBlock" class="sm:grid sm:grid-flow-row sm:grid-cols-3 flex  overflow-x-scroll gap-2">
                     </div>
                 </div>
         </div>

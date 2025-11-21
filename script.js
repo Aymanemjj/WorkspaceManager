@@ -74,8 +74,8 @@ function updateWorkersSection() {
     workersList.forEach(worker =>
         workersListSection.innerHTML +=
         `<div class="workerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
-                <div class="flex lg:flex-row flex-col gap-2">
-                    <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                <div class="flex sm:flex-col lg:flex-row flex-row gap-2">
+                    <div class=" sm:block hidden bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
                     <div class="flex flex-col">
                         <small class="font-bold">${worker.fullname}</small>
                         <small>${worker.role}</small>
@@ -93,20 +93,20 @@ function updateWorkersSection() {
             profileInfoBlock.innerHTML =
                 `<div class="flex gap-16">
                         <div class="flex flex-col">
-                            <label class="font-bold" for="fullName">FullName:</label>
+                            <label class="font-bold" >FullName:</label>
                             <h3 id="PMfullname">${profile.fullname}</h3> 
                         </div>
                         <div class="flex flex-col">
-                            <label class="font-bold" for="role">Role:</label>
+                            <label class="font-bold" >Role:</label>
                             <h3 id="PMrole">${profile.role}</h3>
                         </div>
                     </div>
                     <div>
-                        <label class="font-bold" for="number">Phone Number:</label>
+                        <label class="font-bold" >Phone Number:</label>
                         <h3 id="PMnumber">${profile.number}</h3>
                     </div>
                     <div>
-                        <label class="font-bold" for="email">Email</label>
+                        <label class="font-bold" >Email</label>
                         <h3 id="PMemail">${profile.email}</h3>
                     </div>`
 
@@ -204,7 +204,7 @@ function addNewWorker() {
 
     document.querySelectorAll("input").forEach(input => input.value = "")
     document.getElementById("expDiv").innerHTML =
-        `<label for="experience">Experience</label>
+        `<label>Experience</label>
         <input name="experiences" type="text" placeholder="Experience" class="forumInput bg-[#8EA1B8] p-2 border-[#1e1e1e] border-2 rounded-sm">`
     workersList.push(person);
     addToLocalStorage(workersList)
@@ -320,7 +320,7 @@ function addToZone(element){
 
     switch (chosenZone.id) {
         case "meeting":
-            if(workerZoneC < 8){
+            if(workerZoneC<8){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
@@ -330,7 +330,7 @@ function addToZone(element){
         case "archive":
             if(profile.role ==="nettoyage"||profile.role==="autres rôle"){
                 alert("This worker isn't fit")
-            }else if(workerZoneC <2){
+            }else if(workerZoneC<2){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
@@ -340,7 +340,7 @@ function addToZone(element){
         case "security":
             if(profile.role !== "sécurité"&&profile.role !=="manager"&&profile.role !=="nettoyage"){
                 alert("This worker isn't fit")
-            }else if(workerZoneC <1){
+            }else if(workerZoneC<1){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
@@ -350,7 +350,7 @@ function addToZone(element){
         case "reception":
             if(profile.role !=="réceptionniste"&&profile.role !=="manager"&&profile.role !=="nettoyage"){
                 alert("This worker isn't fit")
-            }else if(workerZoneC <2){
+            }else if(workerZoneC<2){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
@@ -358,7 +358,7 @@ function addToZone(element){
             }
             break;
         case "break":
-            if(workerZoneC < 4){
+            if(workerZoneC<4){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
@@ -368,7 +368,7 @@ function addToZone(element){
         case "servers":
             if(profile.role !=="technicien"&&profile.role !=="manager"&&profile.role !=="nettoyage"){
                 alert("This worker isn't fit")
-            }else if(workerZoneC <=1){
+            }else if(workerZoneC<1){
                 workerZone.innerHTML+=worker;
             }else{
                 alert("Zone is full. Consider removing before adding another");
