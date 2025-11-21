@@ -31,10 +31,36 @@ function closeModal(event) {
 }
 
 /* LocalStorage */
-function addToLocalStorage(list) {
-    localStorage.setItem("workersList", JSON.stringify(list));
+function addToLocalStorage(workersList) {
+    localStorage.setItem("workersList", JSON.stringify(workersList));
     updateWorkersSection();
 }
+
+function addToLocalStorageZone(zone,table){
+    
+    switch (zone) {
+        case "meeting":
+            localStorage.setItem("meetingList",JSON.stringify(table))
+            break;
+        case "archive":
+            localStorage.setItem("archiveList",JSON.stringify(table))
+            break;
+        case "security":
+            localStorage.setItem("securityList",JSON.stringify(table))
+            break;
+        case "reception":
+            localStorage.setItem("receptionList",JSON.stringify(table))
+            break;
+        case "break":
+            localStorage.setItem("breakList",JSON.stringify(table))
+            break;
+        case "servers":
+            localStorage.setItem("serversList",JSON.stringify(table))
+            break;
+    }
+
+}
+
 function getFromLocalStorage() {
     let workersList = JSON.parse(localStorage.getItem("workersList")) || []
     return workersList;
@@ -207,32 +233,12 @@ const displayWorkersModalBtn = document.querySelectorAll(".displayWorkersModal")
 const workersModal = document.getElementById("workersModal")
 const workersDisplayBlock = document.getElementById("workersDisplayBlock")
 
-function EworkersList(){
-    let workersList = getFromLocalStorage()
-
-    switch (chosenZone.id) {
-        case "meeting"||"break":
-            break;
-        case "archive":
-            workersList = workersList.filter(o=>o.rol !=="nettoyage"||"autres rôle")
-            break;
-        case "security":
-            workersList = workersList.filter(o=>o.role ==="sécurité"||"manager"||"nettoyage")
-            break;
-        case "reception":
-            workersList = workersList.filter(o=>o.role ==="réceptionniste"||"manager"||"nettoyage")
-            break;
-        case "server":
-            workersList = workersList.filter(o=>o.role ==="technicien"||"manager"||"nettoyage")
-    }
-    return workersList
-}
 
 function WorkersModalContent() {
-
-    let EworkersList = EworkersList()
+let EworkersListe = []
+    EworkersListe = EworkersList()
     workersDisplayBlock.innerHTML = ""
-    EworkersList.forEach(worker =>
+    EworkersListe.forEach(worker =>
         workersDisplayBlock.innerHTML +=
         `<div class="UsmallWorkerCard hover:animate-bounce bg-[#A4BCC6] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
             <div class="flex lg:flex-row flex-col gap-2">
@@ -252,6 +258,38 @@ function WorkersModalContent() {
 }
 
 
+function EworkersList(){
+    let workersList = getFromLocalStorage()
+    let EworkersListe
+    switch (chosenZone.id) {
+        case "meeting":
+            EworkersListe = workersList
+            break;
+        case "break":
+            EworkersListe = workersList
+            break;
+        case "archive":
+            EworkersListe = workersList.filter(o=>o.role !=="nettoyage"&&o.role !== "autres rôle")
+            break;
+        case "security":
+            EworkersListe = workersList.filter(o=>o.role === "sécurité"||o.role==="manager"||o.role==="nettoyage")
+            break;
+        case "reception":
+            EworkersListe = workersList.filter(o=>o.role ==="réceptionniste"||o.role==="manager"||o.role==="nettoyage")
+            break;
+        case "servers":
+            
+            EworkersListe = workersList.filter(o=> o.role ==="technicien"||o.role==="manager"||o.role==="nettoyage")
+            break;
+    }
+    
+    
+    
+    return EworkersListe
+}
+
+
+
 
 function WorkersModalDisplay() {
     workersModal.classList.replace("hidden", "block")
@@ -259,21 +297,25 @@ function WorkersModalDisplay() {
 
 
 function addToZone(element){
-    const workersList = getFromLocalStorage()
+    let workersList = getFromLocalStorage()
     let filter = element.querySelector("small").innerHTML
     let profile = workersList.find(o => o.fullname === filter);
+    let order = workersList.indexOf(profile)
     const workerZoneC = chosenZone.querySelector(".workerZone").childElementCount
     const workerZone = chosenZone.querySelector(".workerZone")
     let worker = `
         <div class="AsmallWorkerCard hover:animate-bounce bg-[#68A17B] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
-            <div class="flex lg:flex-row flex-col gap-2">
-                <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
-                <div class="flex flex-col">
-                    <small class="font-bold">${profile.fullname}</small>
-                    <small>${profile.role}</small>
+            <div class="flex justify-between">
+                <div class="flex lg:flex-row flex-col gap-2">
+                    <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
+                    <div class="flex flex-col">
+                        <small class="font-bold">${profile.fullname}</small>
+                        <small>${profile.role}</small>
+                    </div>
                 </div>
+                <button type="button" class=" hover:bg-[#497457] rounded-sm removeWorkerBtn"><i class="fa-regular fa-square-minus fa-lg" style="color: #000000;"></i></button>
             </div>
-        </div>`
+        </div>`   
 
     switch (chosenZone.id) {
         case "meeting":
@@ -284,7 +326,7 @@ function addToZone(element){
             }
             break;
         case "archive":
-            if(profile.role =="nettoyage"||"autres rôle"){
+            if(profile.role ==="nettoyage"||profile.role==="autres rôle"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <2){
                 workerZone.innerHTML+=worker;
@@ -293,7 +335,7 @@ function addToZone(element){
             }
             break;
         case "security":
-            if(profile.role == "sécurité"||"manager"||"nettoyage"){
+            if(profile.role !== "sécurité"&&profile.role !=="manager"&&profile.role !=="nettoyage"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <1){
                 workerZone.innerHTML+=worker;
@@ -302,7 +344,7 @@ function addToZone(element){
             }
             break;
         case "reception":
-            if(profile.role =="réceptionniste"||"manager"||"nettoyage"){
+            if(profile.role !=="réceptionniste"&&profile.role !=="manager"&&profile.role !=="nettoyage"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <2){
                 workerZone.innerHTML+=worker;
@@ -318,7 +360,7 @@ function addToZone(element){
             }
             break;
         case "servers":
-            if(profile.role ==="technicien"||"manager"||"nettoyage"){
+            if(profile.role !=="technicien"&&profile.role !=="manager"&&profile.role !=="nettoyage"){
                 alert("This worker isn't fit")
             }else if(workerZoneC <=1){
                 workerZone.innerHTML+=worker;
@@ -328,6 +370,17 @@ function addToZone(element){
             break;
     }
     
+
+    document.querySelectorAll(".removeWorkerBtn").forEach(
+        Btn=> Btn.addEventListener("click",()=>removeWorkerFromZone(Btn)))
+
+
+    let table = JSON.parse(localStorage.getItem(`${chosenZone.id}List`)) || []    
+    table.push(profile)
+    workersList.splice(order,1)
+    addToLocalStorage(workersList)
+    addToLocalStorageZone(chosenZone.id,table)
+    WorkersModalContent()
 }
 
 
@@ -338,5 +391,22 @@ function checkStatus(){
                 element.parentElement.classList.replace("border-[#1E1E1E]","border-red-500")
             }
         })
+        
 }
 checkStatus()
+
+
+function removeWorkerFromZone(Btn){
+    let container = Btn.parentElement.parentElement;
+    let workersList = JSON.parse(localStorage.getItem("workersList"))
+    let filter = 
+    let profile = workersList.filter()
+
+    container.remove();
+    let zone= container.parentElement.parentElement.id
+    console.log(zone);
+    
+    let zoneList = JSON.parse(localStorage.getItem(`${zone}List`))
+    let order = zoneList.indexOf()
+    
+}
