@@ -225,7 +225,7 @@ const displayWorkersModalBtn = document.querySelectorAll(".displayWorkersModal")
     .forEach(element =>element.addEventListener(
         "click",()=>{
             chosenZone=element.parentElement.parentElement
-            WorkersModalContent()
+            WorkersModalDisplay()
         }
     ))
 
@@ -253,7 +253,7 @@ let EworkersListe = []
         element=>element.addEventListener(
             "click",()=>addToZone(element)
         ))
-    WorkersModalDisplay()
+    
 }
 
 
@@ -291,6 +291,7 @@ function EworkersList(){
 
 
 function WorkersModalDisplay() {
+    WorkersModalContent()
     workersModal.classList.replace("hidden", "block")
 }
 
@@ -305,7 +306,7 @@ function addToZone(element){
     let state=true;
     let worker = `
         <div class="AsmallWorkerCard hover:animate-bounce bg-[#68A17B] border-2 border-[#1E1E1E] rounded-md flex lg:flex-row flex-col justify-between p-1 cursor-pointer">
-            <div class="flex justify-between">
+            <div class="flex lg:flex-row flex-col justify-between">
                 <div class="flex lg:flex-row flex-col gap-2">
                     <div class="bg-[url(img/PFP.webp)] bg-cover border-2 border-[#1E1E1E] rounded-sm size-12"></div>
                     <div class="flex flex-col">
@@ -313,7 +314,7 @@ function addToZone(element){
                         <small>${profile.role}</small>
                     </div>
                 </div>
-                <button type="button" class=" hover:bg-[#497457] rounded-sm removeWorkerBtn"><i class="fa-regular fa-square-minus fa-lg" style="color: #000000;"></i></button>
+                <button type="button" class=" hover:bg-red-400 rounded-sm removeWorkerBtn"><i class="fa-regular fa-square-minus fa-lg" style="color: #000000;"></i></button>
             </div>
         </div>`   
 
@@ -387,6 +388,7 @@ function addToZone(element){
         addToLocalStorage(workersList)
         addToLocalStorageZone(chosenZone.id,table)
         WorkersModalContent()
+        checkStatus()
     }
     
 }
@@ -397,10 +399,11 @@ function checkStatus(){
     
     document.querySelectorAll(".workerZoneV").forEach(
         (node) =>{ 
-            if(node.length == 0){      
-                console.log("enter");         
+            
+            if(node.children.length == 0){      
                 node.parentNode.classList.replace("border-[#1E1E1E]","border-red-500")
             }else{
+                
                 node.parentNode.classList.replace("border-red-500","border-[#1E1E1E]")
             }
         })
@@ -432,6 +435,7 @@ function removeWorkerFromZone(Btn){
     addToLocalStorage(workersList)
     addToLocalStorageZone(zone,zoneList)
     WorkersModalContent()
+    checkStatus()
 
     
 }
